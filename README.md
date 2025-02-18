@@ -39,7 +39,30 @@ go get -u gorm.io/gorm
 go get -u gorm.io/driver/postgres
 ```
 
-#### Viper
+#### Viper & Cobra
 ```bash
 go get -u github.com/spf13/viper
+go get -u github.com/spf13/cobra
+
+#### Golang-Migrate for PostgreSQL
+```bash
+go install -tags 'postgres' github.com/golang-migrate/migrate/v4/cmd/migrate@latest
+```
+
+#### AWS
+```bash
+go get -u github.com/aws/aws-sdk-go-v2/aws
+go get -u github.com/aws/aws-sdk-go-v2/config
+go get -u github.com/aws/aws-sdk-go-v2/service/dynamodb
+go get -u github.com/aws/aws-sdk-go-v2/service/s3
+```
+
+#### Golang-JWT
+```bash
+go get -u github.com/golang-jwt/jwt/v5
+```
+
+#### GoFiber V2
+```bash
+go get -u github.com/gofiber/fiber/v2
 ```
