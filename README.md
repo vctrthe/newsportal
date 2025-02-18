@@ -25,9 +25,4 @@ newsportal/
             jwt/                -> generate and validate JWT
     
     [WIP] frontend/
-
-    database/                   -> MySQL Query files
-        create_db.sql           -> Create DB instance and DB tables
-        dev_db.sql              -> Complete function from creating DB instance to table seeder
-        dev_seed.sql            -> Seeding DB tables
 ```
