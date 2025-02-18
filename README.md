@@ -26,3 +26,20 @@ newsportal/
     
     [WIP] frontend/
 ```
+
+### Packages needed for this project
+#### ZeroLog
+```bash
+go get -u github.com/rs/zerolog/log
+```
+
+#### Gorm & PostgreSQL Driver
+```bash
+go get -u gorm.io/gorm
+go get -u gorm.io/driver/postgres
+```
+
+#### Viper
+```bash
+go get -u github.com/spf13/viper
+```
