@@ -43,6 +43,7 @@ go get -u gorm.io/driver/postgres
 ```bash
 go get -u github.com/spf13/viper
 go get -u github.com/spf13/cobra
+```
 
 #### Golang-Migrate for PostgreSQL
 ```bash
