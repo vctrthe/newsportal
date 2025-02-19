@@ -4,6 +4,9 @@ import (
 	"context"
 	"log"
 	"newsportal-backend/config"
+	"newsportal-backend/internal/adapter/handler"
+	"newsportal-backend/internal/adapter/repository"
+	"newsportal-backend/internal/core/service"
 	"newsportal-backend/lib/auth"
 	"newsportal-backend/lib/middleware"
 	"newsportal-backend/lib/pagination"
@@ -21,7 +24,7 @@ import (
 
 func RunServer() {
 	cfg := config.NewConfig()
-	_, err := cfg.ConnectionPostgres()
+	db, err := cfg.ConnectionPostgres()
 	if err != nil {
 		log.Fatalf("Failed to connect to database: %v", err)
 		return
@@ -30,18 +33,28 @@ func RunServer() {
 	cfgR2 := cfg.LoadAwsConfig()
 	_ = s3.NewFromConfig(cfgR2)
 
-	_ = auth.NewJwt(cfg)
+	jwt := auth.NewJwt(cfg)
 	_ = middleware.NewMiddleware(cfg)
 	_ = pagination.NewPagination()
+
+	// Repository
+	authRepo := repository.NewAuthRepository(db.DB)
+
+	// Service
+	authService := service.NewAuthService(authRepo, cfg, jwt)
+
+	// Handler
+	authHandler := handler.NewAuthHandler(authService)
 
 	app := fiber.New()
 	app.Use(cors.New())
 	app.Use(recover.New())
 	app.Use(logger.New(logger.Config{
-		Format: "[${time}] %{ip} &{status} - %{latency} %{method} %{path}\n",
+		Format: "[${time}] ${ip} ${status} - ${latency} ${method} ${path}\n",
 	}))
 
-	_ = app.Group("/api")
+	api := app.Group("/api")
+	api.Post("/login", authHandler.Login)
 
 	go func() {
 		if cfg.App.AppPort == "" {

@@ -9,20 +9,26 @@ newsportal/
         cmd/                    -> starting application/entrypoint
         config/                 -> configuration file
         database/               -> db migration file (using go-migrate)
+            migrations/         -> migrations by using go-migrate
+            seeds/              -> database seed file
         internal/               -> application core
             adapter/            -> HTTP handler, repository layer
-                repository/     -> db interaction
-                handler/        -> HTTP handler
                 cloudlfare/     -> Cloudflare R2 interaction
+                handler/        -> HTTP handler
+                repository/     -> db interaction
             app/                -> application initiator and bridge to another layer, endpoint housing
                 app.go
             core/
                 domain/         -> entity/model
+                    entity/     -> standarization for each layer (no need to change the entire model structure to have the expected output)
+                    model/      -> structs that connected to the database (declaration of database tables)
                 service/        -> usecase (main complex business logic)
         lib/                    -> reuseable functions
+            auth/               -> generate and validate JWT
             conv/
                 conv.go         -> string-int or vice versa conversion, or other reuseable functions
-            jwt/                -> generate and validate JWT
+            middleware/         -> Check JWT
+            pagination/         -> centralized pagination functions
     
     [WIP] frontend/
 ```
