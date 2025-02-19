@@ -24,7 +24,7 @@ type authHandler struct {
 }
 
 // Login implements AuthHandler.
-func (a *authHandler) Login(c *fiber.Ctx) error {
+func (ah *authHandler) Login(c *fiber.Ctx) error {
 	req := request.LoginRequest{}
 	resp := response.SuccessAuthResponse{}
 
@@ -51,7 +51,7 @@ func (a *authHandler) Login(c *fiber.Ctx) error {
 		Password: req.Password,
 	}
 
-	result, err := a.authService.GetUserByEmail(c.Context(), reqLogin)
+	result, err := ah.authService.GetUserByEmail(c.Context(), reqLogin)
 	if err != nil {
 		code = "[HANDLER] Login - 3"
 		log.Errorw(code, err)
