@@ -24,9 +24,9 @@ type categoryRepository struct {
 }
 
 // CreateCategory implements CategoryRepository.
-func (c *categoryRepository) CreateCategory(ctx context.Context, req entity.CategoryEntity) error {
+func (ca *categoryRepository) CreateCategory(ctx context.Context, req entity.CategoryEntity) error {
 	var countSlug int64
-	err = c.db.Table("categories").Where("slug = ?", req.Slug).Count(&countSlug).Error
+	err = ca.db.Table("categories").Where("slug = ?", req.Slug).Count(&countSlug).Error
 	if err != nil {
 		code = "[REPOSITORY] CreateCategory - 1"
 		log.Errorw(code, err)
@@ -41,7 +41,7 @@ func (c *categoryRepository) CreateCategory(ctx context.Context, req entity.Cate
 		CreatedByID: req.User.ID,
 	}
 
-	err = c.db.Create(&modelCategory).Error
+	err = ca.db.Create(&modelCategory).Error
 	if err != nil {
 		code = "[REPOSITORY] CreateCategories - 2"
 		log.Errorw(code, err)
@@ -52,9 +52,9 @@ func (c *categoryRepository) CreateCategory(ctx context.Context, req entity.Cate
 }
 
 // DeleteCategory implements CategoryRepository.
-func (c *categoryRepository) DeleteCategory(ctx context.Context, id int64) error {
+func (ca *categoryRepository) DeleteCategory(ctx context.Context, id int64) error {
 	var count int64
-	err = c.db.Table("contents").Where("category_id = ?", id).Count(&count).Error
+	err = ca.db.Table("contents").Where("category_id = ?", id).Count(&count).Error
 	if err != nil {
 		code = "[REPOSITORY] DeleteCategory - 1"
 		log.Errorw(code, err)
@@ -65,7 +65,7 @@ func (c *categoryRepository) DeleteCategory(ctx context.Context, id int64) error
 		return errors.New("Cannot delete category with associated contents")
 	}
 
-	err = c.db.Where("id = ?", id).Delete(&model.Category{}).Error
+	err = ca.db.Where("id = ?", id).Delete(&model.Category{}).Error
 	if err != nil {
 		code = "[REPOSITORY] DeleteCategory - 2"
 		log.Errorw(code, err)
@@ -76,9 +76,9 @@ func (c *categoryRepository) DeleteCategory(ctx context.Context, id int64) error
 }
 
 // EditCategory implements CategoryRepository.
-func (c *categoryRepository) EditCategory(ctx context.Context, req entity.CategoryEntity) error {
+func (ca *categoryRepository) EditCategory(ctx context.Context, req entity.CategoryEntity) error {
 	var countSlug int64
-	err := c.db.Table("categories").Where("slug = ?", req.Slug).Count(&countSlug).Error
+	err := ca.db.Table("categories").Where("slug = ?", req.Slug).Count(&countSlug).Error
 	if err != nil {
 		code = "[REPOSITORY] EditCategory - 1"
 		log.Errorw(code, err)
@@ -96,7 +96,7 @@ func (c *categoryRepository) EditCategory(ctx context.Context, req entity.Catego
 		CreatedByID: req.User.ID,
 	}
 
-	err = c.db.Where("id = ?", req.ID).Updates(&modelCategory).Error
+	err = ca.db.Where("id = ?", req.ID).Updates(&modelCategory).Error
 	if err != nil {
 		code = "[REPOSITORY] EditCategory - 2"
 		log.Errorw(code, err)
@@ -107,10 +107,10 @@ func (c *categoryRepository) EditCategory(ctx context.Context, req entity.Catego
 }
 
 // GetCategories implements CategoryRepository.
-func (c *categoryRepository) GetCategories(ctx context.Context) ([]entity.CategoryEntity, error) {
+func (ca *categoryRepository) GetCategories(ctx context.Context) ([]entity.CategoryEntity, error) {
 	var modelCategories []model.Category
 
-	err := c.db.Order("created_at DESC").Preload("User").Find(&modelCategories).Error
+	err := ca.db.Order("created_at DESC").Preload("User").Find(&modelCategories).Error
 	if err != nil {
 		code = "[REPOSITORY] GetCategories - 1"
 		log.Errorw(code, err)
@@ -143,9 +143,9 @@ func (c *categoryRepository) GetCategories(ctx context.Context) ([]entity.Catego
 }
 
 // GetCategoryByID implements CategoryRepository.
-func (c *categoryRepository) GetCategoryByID(ctx context.Context, id int64) (*entity.CategoryEntity, error) {
+func (ca *categoryRepository) GetCategoryByID(ctx context.Context, id int64) (*entity.CategoryEntity, error) {
 	var modelCategory model.Category
-	err = c.db.Where("id = ?", id).Preload("User").First(&modelCategory).Error
+	err = ca.db.Where("id = ?", id).Preload("User").First(&modelCategory).Error
 	if err != nil {
 		code = "[REPOSITORY] GetCategoryByID - 1"
 		log.Errorw(code, err)

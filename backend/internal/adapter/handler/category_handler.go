@@ -6,7 +6,7 @@ import (
 	"newsportal-backend/internal/core/domain/entity"
 	"newsportal-backend/internal/core/service"
 	"newsportal-backend/lib/conv"
-	validatorLib "newsportal-backend/lib/validator"
+	"newsportal-backend/lib/validatorLib"
 
 	"github.com/gofiber/fiber/v2"
 	"github.com/gofiber/fiber/v2/log"
@@ -27,7 +27,7 @@ type categoryHandler struct {
 }
 
 // CreateCategory implements CategoryHandler.
-func (ch *categoryHandler) CreateCategory(c *fiber.Ctx) error {
+func (cah *categoryHandler) CreateCategory(c *fiber.Ctx) error {
 	var req request.CategoryRequest
 	claims := c.Locals("user").(*entity.JwtData)
 	userID := claims.UserID
@@ -65,7 +65,7 @@ func (ch *categoryHandler) CreateCategory(c *fiber.Ctx) error {
 		},
 	}
 
-	err = ch.categoryService.CreateCategory(c.Context(), reqEntity)
+	err = cah.categoryService.CreateCategory(c.Context(), reqEntity)
 	if err != nil {
 		code = "[HANDLER] GetCategories - 4"
 		log.Errorw(code, err)
@@ -84,7 +84,7 @@ func (ch *categoryHandler) CreateCategory(c *fiber.Ctx) error {
 }
 
 // DeleteCategory implements CategoryHandler.
-func (ch *categoryHandler) DeleteCategory(c *fiber.Ctx) error {
+func (cah *categoryHandler) DeleteCategory(c *fiber.Ctx) error {
 	claims := c.Locals("user").(*entity.JwtData)
 	userID := claims.UserID
 	if userID == 0 {
@@ -107,7 +107,7 @@ func (ch *categoryHandler) DeleteCategory(c *fiber.Ctx) error {
 		return c.Status(fiber.StatusBadRequest).JSON(errorResp)
 	}
 
-	err = ch.categoryService.DeleteCategory(c.Context(), id)
+	err = cah.categoryService.DeleteCategory(c.Context(), id)
 	if err != nil {
 		code = "[HANDLER] DeleteCategory - 3"
 		log.Errorw(code, err)
@@ -126,7 +126,7 @@ func (ch *categoryHandler) DeleteCategory(c *fiber.Ctx) error {
 }
 
 // EditCategory implements CategoryHandler.
-func (ch *categoryHandler) EditCategory(c *fiber.Ctx) error {
+func (cah *categoryHandler) EditCategory(c *fiber.Ctx) error {
 	var req request.CategoryRequest
 	claims := c.Locals("user").(*entity.JwtData)
 	userID := claims.UserID
@@ -176,7 +176,7 @@ func (ch *categoryHandler) EditCategory(c *fiber.Ctx) error {
 		},
 	}
 
-	err = ch.categoryService.EditCategory(c.Context(), reqEntity)
+	err = cah.categoryService.EditCategory(c.Context(), reqEntity)
 	if err != nil {
 		code = "[HANDLER] EditCategory - 5"
 		log.Errorw(code, err)
@@ -195,7 +195,7 @@ func (ch *categoryHandler) EditCategory(c *fiber.Ctx) error {
 }
 
 // GetCategories implements CategoryHandler.
-func (ch *categoryHandler) GetCategories(c *fiber.Ctx) error {
+func (cah *categoryHandler) GetCategories(c *fiber.Ctx) error {
 	claims := c.Locals("user").(*entity.JwtData)
 	userID := claims.UserID
 	if userID == 0 {
@@ -207,7 +207,7 @@ func (ch *categoryHandler) GetCategories(c *fiber.Ctx) error {
 		return c.Status(fiber.StatusUnauthorized).JSON(errorResp)
 	}
 
-	results, err := ch.categoryService.GetCategories(c.Context())
+	results, err := cah.categoryService.GetCategories(c.Context())
 	if err != nil {
 		code = "[HANDLER] GetCategories - 2"
 		log.Errorw(code, err)
@@ -235,7 +235,7 @@ func (ch *categoryHandler) GetCategories(c *fiber.Ctx) error {
 }
 
 // GetCategoryByID implements CategoryHandler.
-func (ch *categoryHandler) GetCategoryByID(c *fiber.Ctx) error {
+func (cah *categoryHandler) GetCategoryByID(c *fiber.Ctx) error {
 	claims := c.Locals("user").(*entity.JwtData)
 	userID := claims.UserID
 	if userID == 0 {
@@ -258,7 +258,7 @@ func (ch *categoryHandler) GetCategoryByID(c *fiber.Ctx) error {
 		return c.Status(fiber.StatusBadRequest).JSON(errorResp)
 	}
 
-	result, err := ch.categoryService.GetCategoryByID(c.Context(), id)
+	result, err := cah.categoryService.GetCategoryByID(c.Context(), id)
 	if err != nil {
 		code = "[HANDLER] GetCategoryByID - 3"
 		log.Errorw(code, err)

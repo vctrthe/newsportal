@@ -22,11 +22,11 @@ type categoryService struct {
 }
 
 // CreateCategory implements CategoryService.
-func (c *categoryService) CreateCategory(ctx context.Context, req entity.CategoryEntity) error {
+func (ca *categoryService) CreateCategory(ctx context.Context, req entity.CategoryEntity) error {
 	slug := conv.GenerateSlug(req.Title)
 	req.Slug = slug
 
-	err := c.categoryRepository.CreateCategory(ctx, req)
+	err := ca.categoryRepository.CreateCategory(ctx, req)
 	if err != nil {
 		code = "[SERVICE] CreateCategories - 1"
 		log.Errorw(code, err)
@@ -37,8 +37,8 @@ func (c *categoryService) CreateCategory(ctx context.Context, req entity.Categor
 }
 
 // DeleteCategory implements CategoryService.
-func (c *categoryService) DeleteCategory(ctx context.Context, id int64) error {
-	err := c.categoryRepository.DeleteCategory(ctx, id)
+func (ca *categoryService) DeleteCategory(ctx context.Context, id int64) error {
+	err := ca.categoryRepository.DeleteCategory(ctx, id)
 	if err != nil {
 		code = "[SERVICE] DeleteCategory - 1"
 		log.Errorw(code, err)
@@ -49,8 +49,8 @@ func (c *categoryService) DeleteCategory(ctx context.Context, id int64) error {
 }
 
 // EditCategory implements CategoryService.
-func (c *categoryService) EditCategory(ctx context.Context, req entity.CategoryEntity) error {
-	categoryData, err := c.categoryRepository.GetCategoryByID(ctx, req.ID)
+func (ca *categoryService) EditCategory(ctx context.Context, req entity.CategoryEntity) error {
+	categoryData, err := ca.categoryRepository.GetCategoryByID(ctx, req.ID)
 	if err != nil {
 		code = "[SERVICE] EditCategory - 1"
 		log.Errorw(code, err)
@@ -64,7 +64,7 @@ func (c *categoryService) EditCategory(ctx context.Context, req entity.CategoryE
 
 	req.Slug = slug
 
-	err = c.categoryRepository.EditCategory(ctx, req)
+	err = ca.categoryRepository.EditCategory(ctx, req)
 	if err != nil {
 		code = "[SERVICE] EditCategory - 2"
 		log.Errorw(code, err)
@@ -75,8 +75,8 @@ func (c *categoryService) EditCategory(ctx context.Context, req entity.CategoryE
 }
 
 // GetCategories implements CategoryService.
-func (c *categoryService) GetCategories(ctx context.Context) ([]entity.CategoryEntity, error) {
-	results, err := c.categoryRepository.GetCategories(ctx)
+func (ca *categoryService) GetCategories(ctx context.Context) ([]entity.CategoryEntity, error) {
+	results, err := ca.categoryRepository.GetCategories(ctx)
 	if err != nil {
 		code = "[SERVICE] GetCategories - 1"
 		log.Errorw(code, err)
@@ -87,8 +87,8 @@ func (c *categoryService) GetCategories(ctx context.Context) ([]entity.CategoryE
 }
 
 // GetCategoryByID implements CategoryService.
-func (c *categoryService) GetCategoryByID(ctx context.Context, id int64) (*entity.CategoryEntity, error) {
-	result, err := c.categoryRepository.GetCategoryByID(ctx, id)
+func (ca *categoryService) GetCategoryByID(ctx context.Context, id int64) (*entity.CategoryEntity, error) {
+	result, err := ca.categoryRepository.GetCategoryByID(ctx, id)
 	if err != nil {
 		code = "[SERVICE] GetCategoryByID - 1"
 		log.Errorw(code, err)

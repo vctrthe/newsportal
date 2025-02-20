@@ -5,7 +5,7 @@ import (
 	"newsportal-backend/internal/adapter/handler/response"
 	"newsportal-backend/internal/core/domain/entity"
 	"newsportal-backend/internal/core/service"
-	validatorLib "newsportal-backend/lib/validator"
+	"newsportal-backend/lib/validatorLib"
 
 	"github.com/gofiber/fiber/v2"
 	"github.com/gofiber/fiber/v2/log"
