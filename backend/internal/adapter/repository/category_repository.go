@@ -62,7 +62,7 @@ func (ca *categoryRepository) DeleteCategory(ctx context.Context, id int64) erro
 	}
 
 	if count > 0 {
-		return errors.New("Cannot delete category with associated contents")
+		return errors.New("cannot delete category with associated contents")
 	}
 
 	err = ca.db.Where("id = ?", id).Delete(&model.Category{}).Error
