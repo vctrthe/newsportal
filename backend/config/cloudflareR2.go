@@ -12,7 +12,7 @@ import (
 func (cfg Config) LoadAwsConfig() aws.Config {
 	conf, err := AwsConfig.LoadDefaultConfig(context.TODO(),
 		AwsConfig.WithCredentialsProvider(credentials.NewStaticCredentialsProvider(
-			cfg.CloudflareR2.ApiKey, cfg.CloudflareR2.ApiSecret, "",
+			cfg.R2.ApiKey, cfg.R2.ApiSecret, "",
 		)), AwsConfig.WithRegion("auto"))
 	if err != nil {
 		log.Fatal().Msgf("unable to load AWS Config, %v", err)

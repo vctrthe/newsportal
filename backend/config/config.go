@@ -30,9 +30,9 @@ type CloudflareR2 struct {
 }
 
 type Config struct {
-	App          App
-	Psql         PsqlDB
-	CloudflareR2 CloudflareR2
+	App  App
+	Psql PsqlDB
+	R2   CloudflareR2
 }
 
 func NewConfig() *Config {
@@ -50,8 +50,8 @@ func NewConfig() *Config {
 			DBMaxOpen: viper.GetInt("DATABASE_MAX_OPEN_CONNECTION"),
 			DBMaxIdle: viper.GetInt("DATABASE_MAX_IDLE_CONNECTION"),
 		},
-		CloudflareR2: CloudflareR2{
-			Name:      viper.GetString("CLOUDFLARE_R2_NAME"),
+		R2: CloudflareR2{
+			Name:      viper.GetString("CLOUDFLARE_R2_BUCKET_NAME"),
 			ApiKey:    viper.GetString("CLOUDFLARE_R2_API_KEY"),
 			ApiSecret: viper.GetString("CLOUDFLARE_R2_API_SECRET"),
 			Token:     viper.GetString("CLOUDFLARE_R2_TOKEN"),
