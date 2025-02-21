@@ -19,15 +19,17 @@ func ValidateStruct(s interface{}) error {
 		for _, err := range err.(validator.ValidationErrors) {
 			switch err.Tag() {
 			case "email":
-				errorMessages = append(errorMessages, "Invalid email format")
+				errorMessages = append(errorMessages, "invalid email format")
 			case "required":
-				errorMessages = append(errorMessages, "Field "+err.Field()+" wajib diisi.")
+				errorMessages = append(errorMessages, "field "+err.Field()+" wajib diisi")
 			case "min":
 				if err.Field() == "Password" {
-					errorMessages = append(errorMessages, "Password minimal 8 karakter.")
+					errorMessages = append(errorMessages, "password minimal 8 karakter")
 				}
+			case "eqfield":
+				errorMessages = append(errorMessages, "field "+err.Field()+" dan "+err.Param()+" tidak sama")
 			default:
-				errorMessages = append(errorMessages, "Field "+err.Field()+" tidak valid.")
+				errorMessages = append(errorMessages, "field "+err.Field()+" tidak valid")
 			}
 		}
 
