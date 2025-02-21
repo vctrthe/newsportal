@@ -29,3 +29,6 @@
 
 # Air temp folder (build log, main.exe)
 /backend/tmp/*
+
+# Temporary Image Directory
+/backend/temp/*
