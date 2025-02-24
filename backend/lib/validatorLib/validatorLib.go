@@ -21,19 +21,19 @@ func ValidateStruct(s interface{}) error {
 			case "email":
 				errorMessages = append(errorMessages, "invalid email format")
 			case "required":
-				errorMessages = append(errorMessages, "field "+err.Field()+" wajib diisi")
+				errorMessages = append(errorMessages, "field "+err.Field()+" cannot be empty")
 			case "min":
 				if err.Field() == "Password" {
-					errorMessages = append(errorMessages, "password minimal 8 karakter")
+					errorMessages = append(errorMessages, "minimum password length is 6 characters")
 				}
 			case "eqfield":
-				errorMessages = append(errorMessages, "field "+err.Field()+" dan "+err.Param()+" tidak sama")
+				errorMessages = append(errorMessages, "field "+err.Field()+" and "+err.Param()+" not match")
 			default:
-				errorMessages = append(errorMessages, "field "+err.Field()+" tidak valid")
+				errorMessages = append(errorMessages, "field "+err.Field()+" invalid")
 			}
 		}
 
-		return errors.New("validasi gagal: " + joinMessage(errorMessages))
+		return errors.New("validation failed: " + joinMessage(errorMessages))
 	}
 
 	return nil

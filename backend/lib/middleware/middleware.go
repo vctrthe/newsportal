@@ -24,7 +24,7 @@ func (o *Options) CheckToken() fiber.Handler {
 		authHandler := c.Get("Authorization")
 		if authHandler == "" {
 			errorResponse.Meta.Status = false
-			errorResponse.Meta.Message = "Missing Authorization header"
+			errorResponse.Meta.Message = "missing Authorization header"
 			return c.Status(fiber.StatusUnauthorized).JSON(errorResponse)
 		}
 
@@ -32,7 +32,7 @@ func (o *Options) CheckToken() fiber.Handler {
 		claims, err := o.authJwt.VerifyAccessToken(tokenString)
 		if err != nil {
 			errorResponse.Meta.Status = false
-			errorResponse.Meta.Message = "Token Invalid"
+			errorResponse.Meta.Message = "token invalid"
 			return c.Status(fiber.StatusUnauthorized).JSON(errorResponse)
 		}
 
