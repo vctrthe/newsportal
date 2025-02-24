@@ -1,0 +1,17 @@
+services:
+  newsportal-backend:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: newsportal-backend
+    ports:
+      - "8081:8081"
+    env_file:
+      - .env
+    restart: unless-stopped
+    networks:
+      - newsportal-network
+
+networks:
+  newsportal-network:
+    driver: bridge
