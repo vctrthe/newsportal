@@ -5,7 +5,8 @@
 2. [Project's Packages](#packages-needed-for-this-project)
 3. [How to Use](#how-to-use)
 4. [Start the Project](#start-the-project)
-5. [Docker Implementation](#docker-implementation)
+5. [API Documentation](#api-documentation)
+6. [Docker Implementation](#docker-implementation)
 
 ## Backend Project Structure
 ```
@@ -192,6 +193,14 @@ air
 > Without Hot-Reload
 ```
 go run main.go
+```
+
+## API Documentation
+To Access the API Documentation, make sure `APP_ENV` is `development`.
+
+Access through:
+```
+http://localhost:port/api/docs
 ```
 
 ## Docker Implementation
