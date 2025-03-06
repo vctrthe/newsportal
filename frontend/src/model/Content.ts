@@ -6,6 +6,7 @@ export interface Content {
     image: string;
     tags: string[];
     status: string;
+    category_name: string;
     created_at: string;
     author: string;
     created_by_name: string;
