@@ -67,10 +67,6 @@ export default function ContentByCategory({params}: ContentByCategoryPageProps) 
         }
     };
 
-    useEffect(() => {
-        console.log("Pagination Data:", pagination);
-    }, [pagination]);
-
 
     const handlePrevClick = () => {
         if (pagination && currentPage > 1) {
