@@ -5,15 +5,17 @@ Web-Based Company News Portal. Built using Go and Next.js. This project is an im
 ## Project Structure
 ```
 newsportal/
-├───backend/-> Backend side of the project. Built using Go.
-│    │   .../
+├── backend/            -> Backend side of the project. Built using Go.
+│   ├── ...
+│   └── README.md       -> Backend documentation.
 │
-├───frontend/-> Frontend side of the project. Built using Next.js.
-│    │   .../
+├── frontend/           -> Frontend side of the project. Built using Next.js.
+│   ├── ...
+│   └── README.md       -> Frontend documentation.
 │
-├───.gitignore-> Global gitignore file (for backend and frontend)
+├── .gitignore          -> Global gitignore file (for backend and frontend)
 │
-├───README.go-> Project documentation
+└── README.md           -> Project documentation.
 ```
 
 ## Table of Contents
