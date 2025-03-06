@@ -31,7 +31,11 @@
 /backend/tmp/*
 
 # Temporary Image Directory
-/backend/temp/*
+/backend/temp/content/*.png
+/backend/temp/content/*.jpg
+/backend/temp/content/*.jpeg
+/backend/temp/content/*.gif
+/backend/temp/content/*.webp
 
 # Frontend Git Ignore List:
 # See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
@@ -75,3 +79,11 @@
 # typescript
 /frontend/*.tsbuildinfo
 /frontend/next-env.d.ts
+/frontend/next.config.ts
+
+# "public" assets
+/frontend/public/img/*.png
+/frontend/public/img/*.jpg
+/frontend/public/img/*.jpeg
+/frontend/public/img/*.gif
+/frontend/public/img/*.webp
