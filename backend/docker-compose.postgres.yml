@@ -1,0 +1,48 @@
+services:
+  newsportal-backend:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: newsportal-backend
+    ports:
+      - "8081:8081"
+    env_file:
+      - .env
+    restart: unless-stopped
+    networks:
+      - newsportal-network
+  postgres:
+    image: postgres:16.8-alpine3.20
+    container_name: newsportal-db
+    restart: unless-stopped
+    environment:
+      - POSTGRES_USER=admin
+      - POSTGRES_PASSWORD=admin123
+      - POSTGRES_DB=newsportal
+    ports:
+      - "5432:5432"
+    volumes:
+      - ./postgres_data:/var/lib/postgresql/data
+    networks:
+      - newsportal-network
+  
+  pgadmin:
+    image: dpage/pgadmin4:latest
+    container_name: newsportal-pgadmin
+    restart: unless-stopped
+    environment:
+      - PGADMIN_DEFAULT_EMAIL=admin@example.com
+      - PGADMIN_DEFAULT_PASSWORD=admin123
+    ports:
+      - "5050:80"
+    depends_on:
+      - postgres
+    networks:
+      - newsportal-network
+
+volumes:
+  postgres_data:
+
+networks:
+  newsportal-network:
+    driver: bridge
