@@ -24,6 +24,10 @@ func (o *Options) AddPagination(totalData int, page int, perPage int) (*entity.P
 	}
 
 	totalPage := int(math.Ceil(float64(totalData) / float64(limitData)))
+	if totalData <= limitData {
+		totalPage = 1
+	}
+
 	last := (newPage * limitData)
 	first := last - limitData
 	if totalData < last {
