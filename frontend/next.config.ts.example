@@ -1,0 +1,15 @@
+import type { NextConfig } from "next";
+
+const nextConfig: NextConfig = {
+  /* config options here */
+  images: {
+    remotePatterns: [
+      {
+        protocol: "https",
+        hostname: "cloudflarer2.public.dev.link"
+      }
+    ]
+  }
+};
+
+export default nextConfig;

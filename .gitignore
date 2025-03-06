@@ -31,4 +31,59 @@
 /backend/tmp/*
 
 # Temporary Image Directory
-/backend/temp/*
+/backend/temp/content/*.png
+/backend/temp/content/*.jpg
+/backend/temp/content/*.jpeg
+/backend/temp/content/*.gif
+/backend/temp/content/*.webp
+
+# Frontend Git Ignore List:
+# See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
+
+# dependencies
+/frontend/node_modules
+/frontend/.pnp
+/frontend/.pnp.*
+/frontend/.yarn/*
+!/frontend/.yarn/patches
+!/frontend/.yarn/plugins
+!/frontend/.yarn/releases
+!/frontend/.yarn/versions
+
+# testing
+/frontend/coverage
+
+# next.js
+/frontend/.next/
+/frontend/out/
+
+# production
+/frontend/build
+
+# misc
+/frontend/.DS_Store
+/frontend/*.pem
+
+# debug
+/frontend/npm-debug.log*
+/frontend/yarn-debug.log*
+/frontend/yarn-error.log*
+/frontend/.pnpm-debug.log*
+
+# env files (can opt-in for committing if needed)
+/frontend/.env
+
+# vercel
+/frontend.vercel
+
+# typescript
+/frontend/*.tsbuildinfo
+/frontend/next-env.d.ts
+/frontend/next.config.ts
+
+# "public" assets
+/frontend/public/img/*.png
+/frontend/public/img/*.jpg
+/frontend/public/img/*.jpeg
+/frontend/public/img/*.gif
+/frontend/public/img/*.webp
