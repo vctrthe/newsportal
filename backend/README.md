@@ -116,7 +116,8 @@ newsportal/
     │
     ├── .air.toml.example                                       -> Air default configuration example
     ├── .env.example                                            -> Environment table
-    ├── docker-compose.yml                                      -> Project's docker-compose
+    ├── docker-compose.postgres.yml                             -> Docker compose for the project WITH pgAdmin and PostgreSQL built in
+    ├── docker-compose.yml                                      -> Docker compose for the project WITHOUT pgAdmin and PostgreSQL
     ├── Dockerfile                                              -> Custom image for the project (minimal build & size)
     ├── go.mod                                                  -> Go module
     ├── go.sum                                                  -> Go module checksum
@@ -204,9 +205,17 @@ http://localhost:port/api/docs
 ```
 
 ## Docker Implementation
-This project can be run with Docker, using the following command:
-```bash
-docker compose up && build -d
+There are 2 versions of Docker Compose, one with PostgreSQL 16.8 Alpine and latest version of pgAdmin built in, and one without. This is to accomodate user who hasn't have Database Server.
+
+To run :
+> Docker Compose with PostgreSQL and pgAdmin
+```
+docker compose -f docker-compose.postgres.yml up --build -d
 ```
 
-This project's Dockerfile is built using the minimal image, so it won't need large amounts of space.
+> Docker Compose without PostgreSQL and pgAdmin
+```
+docker compose -f docker-compose.yml up --build -d
+```
+
+To access pgAdmin, go to `http://localhost-or-ip-address:port`
